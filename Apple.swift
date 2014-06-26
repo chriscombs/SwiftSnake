@@ -6,8 +6,9 @@
 //  Copyright (c) 2014 ChrisCombs. All rights reserved.
 //
 
-import Foundation
+import UIKit
 
 class Apple : WorldSquare {
-    
+   // class let color = UIColor.redColor() Not Yet Supported
+
 }

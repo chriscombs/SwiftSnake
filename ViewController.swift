@@ -7,13 +7,14 @@
 //
 
 import UIKit
+import Foundation
 
 let gridSize:Int = 30
 
 class ViewController: UIViewController {
-
+    
     var worldView = World() //Because the compiler wont let me leave it blank
-    var snake = Snake()
+
     @IBOutlet var scoreLabel: UILabel
     
     override func viewDidLoad() {
@@ -24,7 +25,8 @@ class ViewController: UIViewController {
         worldView = World()
         view.addSubview(worldView)
         
-        self.addRecognizers()
+        self.addRecognizers()       
+        let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateWorld", userInfo: nil, repeats: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,20 +52,21 @@ class ViewController: UIViewController {
     func handleSwipe(swipe:UISwipeGestureRecognizer) {
         switch swipe.direction {
         case UISwipeGestureRecognizerDirection.Up:
-            println("Up")
-            snake.direction = Direction.Up
+            worldView.snake.direction = Direction.Up
         case UISwipeGestureRecognizerDirection.Down:
-            println("Down")
-            snake.direction = Direction.Down
+            worldView.snake.direction = Direction.Down
         case UISwipeGestureRecognizerDirection.Left:
-            println("Left")
-            snake.direction = Direction.Left
+            worldView.snake.direction = Direction.Left
         case UISwipeGestureRecognizerDirection.Right:
-            println("Right")
-            snake.direction = Direction.Right
+            worldView.snake.direction = Direction.Right
         default:
             println("Some other mysterious direction")
         }
+    }
+    
+    func updateWorld() {
+        worldView.snake.moveHead()
+        worldView.updateSquareViews()
     }
 }
 
