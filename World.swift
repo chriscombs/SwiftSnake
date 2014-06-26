@@ -11,6 +11,7 @@ import QuartzCore
 
 let gridColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
 
+
 class World : UIView  {
     var linesArray:UIView[] = []
     var applesArray:Apple[] = []
@@ -72,7 +73,7 @@ class World : UIView  {
         }
         
         let (x, y) = snake.tailSquares[0].coordinates
-        if (x < 1 || y < 1 || x >= gridSize || y >= gridSize) {
+        if (x < 0 || y < 0 || x >= gridSize || y >= gridSize) {
             // TODO - game over
             snake = Snake()
         }

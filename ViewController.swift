@@ -10,6 +10,7 @@ import UIKit
 import Foundation
 
 let gridSize:Int = 30
+let gameUpdateSpeed = 0.25
 
 class ViewController: UIViewController {
     
@@ -26,7 +27,7 @@ class ViewController: UIViewController {
         view.addSubview(worldView)
         
         self.addRecognizers()       
-        let timer = NSTimer.scheduledTimerWithTimeInterval(0.5, target: self, selector: "updateWorld", userInfo: nil, repeats: true)
+        let timer = NSTimer.scheduledTimerWithTimeInterval(gameUpdateSpeed, target: self, selector: "updateWorld", userInfo: nil, repeats: true)
     }
     
     override func viewDidLayoutSubviews() {
@@ -50,15 +51,24 @@ class ViewController: UIViewController {
     }
     
     func handleSwipe(swipe:UISwipeGestureRecognizer) {
+        let oldDirection = worldView.snake.direction // In order to make sure the user can't turn 180 degrees
         switch swipe.direction {
         case UISwipeGestureRecognizerDirection.Up:
-            worldView.snake.direction = Direction.Up
+            if (oldDirection != Direction.Down) {
+                worldView.snake.changeDirection(Direction.Up)
+            }
         case UISwipeGestureRecognizerDirection.Down:
-            worldView.snake.direction = Direction.Down
+            if (oldDirection != Direction.Up) {
+                worldView.snake.changeDirection(Direction.Down)
+            }
         case UISwipeGestureRecognizerDirection.Left:
-            worldView.snake.direction = Direction.Left
+            if (oldDirection != Direction.Right) {
+                worldView.snake.changeDirection(Direction.Left)
+            }
         case UISwipeGestureRecognizerDirection.Right:
-            worldView.snake.direction = Direction.Right
+            if (oldDirection != Direction.Left) {
+                worldView.snake.changeDirection(Direction.Right)
+            }
         default:
             println("Some other mysterious direction")
         }

@@ -28,11 +28,11 @@ class Snake : NSObject {
     
     func initializeSnakeSpot() {
         let firstSquare = WorldSquare()
-        firstSquare.coordinates = (gridSize/2-1, gridSize/2)
-        tailSquares += firstSquare// Start in the middle
+        firstSquare.coordinates = (gridSize/2-1, gridSize/2-1) // Start in the middle
+        tailSquares += firstSquare
         for index in 1..length {
             let (previousX, previousY) = tailSquares[index-1].coordinates
-            let point = (previousX, previousY-1)
+            let point = (previousX, previousY+1)
             let worldSquare = WorldSquare()
             worldSquare.coordinates = point
             tailSquares += worldSquare
@@ -49,7 +49,6 @@ class Snake : NSObject {
     
     func moveHead() {
         let (previousX, previousY) = tailSquares[0].coordinates
-        
         switch direction {
         case Direction.Up:
             var (x, y) = tailSquares[0].coordinates
@@ -68,7 +67,6 @@ class Snake : NSObject {
             x++
             tailSquares[0].coordinates = (x,y)
         }
-        
         calculateTail(previousX, oldY: previousY)
     }
     
