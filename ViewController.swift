@@ -12,7 +12,7 @@ import Foundation
 let gridSize:Int = 30
 let gameUpdateSpeed = 0.25
 
-class ViewController: UIViewController {
+class ViewController: UIViewController, WorldDelegate {
     
     var worldView = World() //Because the compiler wont let me leave it blank
 
@@ -24,6 +24,7 @@ class ViewController: UIViewController {
         scoreLabel.text = "0"
         
         worldView = World()
+        worldView.delegate = self
         view.addSubview(worldView)
         
         self.addRecognizers()       
@@ -77,6 +78,15 @@ class ViewController: UIViewController {
     func updateWorld() {
         worldView.snake.moveHead()
         worldView.updateSquareViews()
+    }
+    
+    func snakeDidEatApple() {
+        var count:Int = scoreLabel.text.toInt()!
+        count++
+        scoreLabel.text = "\(count)"
+    }
+    func snakeDidHitEdge()  {
+        scoreLabel.text = "0"
     }
 }
 

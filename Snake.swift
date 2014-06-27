@@ -45,6 +45,9 @@ class Snake : NSObject {
     
     func addLength() {
         length++
+        var newSquare = WorldSquare()
+        newSquare.coordinates = tailSquares[length-2].coordinates
+        tailSquares += newSquare
     }
     
     func moveHead() {

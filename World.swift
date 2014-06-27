@@ -12,11 +12,17 @@ import QuartzCore
 let gridColor = UIColor(red: 0, green: 1, blue: 0, alpha: 0.3)
 
 
+protocol WorldDelegate {
+    func snakeDidEatApple()
+    func snakeDidHitEdge()
+}
+
 class World : UIView  {
     var linesArray:UIView[] = []
-    var applesArray:Apple[] = []
     var shownSquares: WorldSquare[] = []
     var snake = Snake()
+    var currentApple = Apple()
+    var delegate:WorldDelegate?
     
     init() {
         super.init(frame: CGRectZero)
@@ -24,6 +30,8 @@ class World : UIView  {
         layer.borderWidth = 2.0
         createLines()
         updateSquareViews()
+        placeNewApple()
+        shownSquares += currentApple
     }
     
     func createLines() {
@@ -71,19 +79,45 @@ class World : UIView  {
         for square in shownSquares {
             square.view.removeFromSuperview()
         }
+        shownSquares = []
+        
+        // Re-add the apple
+        shownSquares += currentApple
+        var view = Apple.genericView()
+        addSubview(view)
+        currentApple.view = view
         
         let (x, y) = snake.tailSquares[0].coordinates
-        if (x < 0 || y < 0 || x >= gridSize || y >= gridSize) {
+        let (appleX, appleY) = currentApple.coordinates
+        if x < 0 || y < 0 || x >= gridSize || y >= gridSize { // Check to see if snake is off the grid
             // TODO - game over
+            delegate?.snakeDidHitEdge()
             snake = Snake()
         }
-        
+        else if x == appleX && y == appleY { // Check to see if snake is at apple
+            snake.addLength()
+            delegate?.snakeDidEatApple()
+            placeNewApple()
+        }        
+        // Draw the snake
         for square in snake.tailSquares {
             var view = WorldSquare.genericView()
             addSubview(view)
             square.view = view
             shownSquares += square
         }
+    }
+    
+    func placeNewApple() {
+        let (randomX, randomY) = (Int(arc4random_uniform(UInt32(gridSize))), Int(arc4random_uniform(UInt32(gridSize))))
+        // Check to make sure you arent placing the apple on a part of the snake
+        for square in snake.tailSquares {
+            let (x, y) = square.coordinates
+            if randomX == x && randomY == y {
+                println("BREAK") // TODO
+            }
+        }
+        currentApple.coordinates = (randomX, randomY)
     }
     
 }

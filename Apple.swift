@@ -11,4 +11,11 @@ import UIKit
 class Apple : WorldSquare {
    // class let color = UIColor.redColor() Not Yet Supported
 
+    override class func genericView() -> UIView {
+        var view = UIView()
+        view.backgroundColor = UIColor.redColor()
+        view.layer.cornerRadius = 3.0
+        
+        return view
+    }
 }
