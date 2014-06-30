@@ -76,11 +76,11 @@ class World : UIView  {
     }
     
     func updateSquareViews() {
+        // Remove all existing squares
         for square in shownSquares {
             square.view.removeFromSuperview()
         }
         shownSquares = []
-        
         // Re-add the apple
         shownSquares += currentApple
         var view = Apple.genericView()
@@ -88,11 +88,18 @@ class World : UIView  {
         currentApple.view = view
         
         let (x, y) = snake.tailSquares[0].coordinates
+        for index in 1..snake.tailSquares.count-1 { // Check to see if snake is colliding with itself
+            println(snake.tailSquares.count-1)
+            let (tailX, tailY) = snake.tailSquares[index].coordinates
+            if (x == tailX && y == tailY) {
+                gameOver()
+                return
+            }
+        }
         let (appleX, appleY) = currentApple.coordinates
         if x < 0 || y < 0 || x >= gridSize || y >= gridSize { // Check to see if snake is off the grid
-            // TODO - game over
-            delegate?.snakeDidHitEdge()
-            snake = Snake()
+            gameOver()
+            return
         }
         else if x == appleX && y == appleY { // Check to see if snake is at apple
             snake.addLength()
@@ -118,6 +125,11 @@ class World : UIView  {
             }
         }
         currentApple.coordinates = (randomX, randomY)
+    }
+    
+    func gameOver() {
+        delegate?.snakeDidHitEdge()
+        snake = Snake()
     }
     
 }
