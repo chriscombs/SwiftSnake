@@ -19,7 +19,7 @@ class Snake : NSObject {
     var length = 3
     var direction: Direction = Direction.Up
     
-    var tailSquares:WorldSquare[] = []
+    var tailSquares:[WorldSquare] = []
     
     init() {
         super.init()
@@ -30,7 +30,7 @@ class Snake : NSObject {
         let firstSquare = WorldSquare()
         firstSquare.coordinates = (gridSize/2-1, gridSize/2-1) // Start in the middle
         tailSquares += firstSquare
-        for index in 1..length {
+        for index in 1..<length {
             let (previousX, previousY) = tailSquares[index-1].coordinates
             let point = (previousX, previousY+1)
             let worldSquare = WorldSquare()
@@ -76,7 +76,7 @@ class Snake : NSObject {
     func calculateTail(oldX: Int, oldY: Int) {
         var oldPlaceholder = tailSquares[1].coordinates
         tailSquares[1].coordinates = (oldX, oldY)
-        for index in 2..length {
+        for index in 2..<length {
             var currentSpot = tailSquares[index].coordinates
             tailSquares[index].coordinates = oldPlaceholder
             oldPlaceholder = currentSpot

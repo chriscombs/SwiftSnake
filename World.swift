@@ -18,8 +18,8 @@ protocol WorldDelegate {
 }
 
 class World : UIView  {
-    var linesArray:UIView[] = []
-    var shownSquares: WorldSquare[] = []
+    var linesArray:[UIView] = []
+    var shownSquares: [WorldSquare] = []
     var snake = Snake()
     var currentApple = Apple()
     var delegate:WorldDelegate?
@@ -36,7 +36,7 @@ class World : UIView  {
     
     func createLines() {
         // Vertical lines
-        for index in 0..gridSize {
+        for index in 0..<gridSize {
             var lineView:UIView = UIView(frame: CGRectZero)
             lineView.frame = CGRectMake(0, 0, 1, 0)
             lineView.backgroundColor = gridColor
@@ -44,7 +44,7 @@ class World : UIView  {
             self.addSubview(lineView)
         }
         // Horizontal lines
-        for index in 0..gridSize {
+        for index in 0..<gridSize {
             var lineView:UIView = UIView(frame: CGRectZero)
             lineView.frame = CGRectMake(0, 0, 0, 1)
             lineView.backgroundColor = gridColor
@@ -57,13 +57,13 @@ class World : UIView  {
         super.layoutSubviews()
         let fraction = self.frame.size.width/Double(gridSize)
         // Vertical
-        for index in 1..gridSize {
+        for index in 1..<gridSize {
             var view = linesArray[index-1]
             view.frame.size.height = self.frame.size.height
             view.frame.origin.x = fraction * Double(index)
         }
         // Horizontal
-        for index in gridSize..gridSize*2 {
+        for index in gridSize..<gridSize*2 {
             var view = linesArray[index-1]
             view.frame.size.width = self.frame.size.width
             view.frame.origin.y = fraction * Double(index-gridSize)
@@ -88,7 +88,7 @@ class World : UIView  {
         currentApple.view = view
         
         let (x, y) = snake.tailSquares[0].coordinates
-        for index in 1..snake.tailSquares.count-1 { // Check to see if snake is colliding with itself
+        for index in 1..<snake.tailSquares.count-1 { // Check to see if snake is colliding with itself
             println(snake.tailSquares.count-1)
             let (tailX, tailY) = snake.tailSquares[index].coordinates
             if (x == tailX && y == tailY) {
