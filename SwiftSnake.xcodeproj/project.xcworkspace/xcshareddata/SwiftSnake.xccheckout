@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>9EC647B4-E24B-4132-AA7C-CD0AA568BACC</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SwiftSnake</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>9CA73CE842DC0523F22746E282D1A3F840F667A5</key>
+		<string>https://github.com/chriscombs/SwiftSnake.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SwiftSnake.xcodeproj</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>9CA73CE842DC0523F22746E282D1A3F840F667A5</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/chriscombs/SwiftSnake.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>111</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>9CA73CE842DC0523F22746E282D1A3F840F667A5</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>9CA73CE842DC0523F22746E282D1A3F840F667A5</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SwiftSnake</string>
+		</dict>
+	</array>
+</dict>
+</plist>
